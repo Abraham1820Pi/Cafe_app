@@ -77,7 +77,7 @@
             <img :src="product.image" :alt="product.name" class="product-preview-image" />
             <div class="product-preview-info">
               <h4>{{ product.name }}</h4>
-              <p class="price">${{ (product.price / 100).toFixed(2) }}</p>
+              <p class="price">${{ (product.price / 1000).toFixed(3) }}</p>
               <div class="rating">
                 <span class="stars">
                   <i v-for="n in 5" :key="n" 

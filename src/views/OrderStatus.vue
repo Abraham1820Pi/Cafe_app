@@ -74,11 +74,11 @@
                     <p>{{ item.description }}</p>
                     <div class="item-price-qty">
                       <span class="quantity">Cantidad: {{ item.quantity }}</span>
-                      <span class="price">${{ (item.price / 100).toFixed(2) }} c/u</span>
+                      <span class="price">${{ (item.price / 1000).toFixed(3) }} c/u</span>
                     </div>
                   </div>
                   <div class="item-total">
-                    ${{ ((item.price * item.quantity) / 100).toFixed(2) }}
+                    ${{ ((item.price * item.quantity) / 1000).toFixed(3) }}
                   </div>
                 </div>
               </div>
@@ -86,7 +86,7 @@
               <div class="order-total">
                 <div class="total-row">
                   <span>Total del pedido:</span>
-                  <span class="total-amount">${{ (order.total / 100).toFixed(2) }}</span>
+                  <span class="total-amount">${{ (order.total / 1000).toFixed(3) }}</span>
                 </div>
               </div>
             </div>

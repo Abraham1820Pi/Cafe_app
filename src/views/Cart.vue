@@ -36,7 +36,7 @@
                 <h4 class="item-name">{{ item.name }}</h4>
                 <p class="item-description">{{ item.description }}</p>
                 <div class="item-price">
-                  ${{ (item.price / 100).toFixed(2) }} c/u
+                  ${{ (item.price / 1000).toFixed(3) }} c/u
                 </div>
               </div>
               
@@ -65,7 +65,7 @@
                 </div>
                 
                 <div class="item-total">
-                  ${{ ((item.price * item.quantity) / 100).toFixed(2) }}
+                  ${{ ((item.price * item.quantity) / 1000).toFixed(3) }}
                 </div>
                 
                 <button
@@ -88,24 +88,24 @@
             <div class="summary-details">
               <div class="summary-row">
                 <span>Subtotal ({{ cartItemCount }} productos)</span>
-                <span>${{ (cartTotal / 100).toFixed(2) }}</span>
+                <span>${{ (cartTotal / 1000).toFixed(3) }}</span>
               </div>
               
               <div class="summary-row">
                 <span>Impuestos</span>
-                <span>${{ (taxes / 100).toFixed(2) }}</span>
+                <span>${{ (taxes / 1000).toFixed(3) }}</span>
               </div>
               
               <div class="summary-row">
                 <span>Descuento de fidelidad</span>
-                <span class="discount">-${{ (loyaltyDiscount / 100).toFixed(2) }}</span>
+                <span class="discount">-${{ (loyaltyDiscount / 1000).toFixed(3) }}</span>
               </div>
               
               <div class="summary-divider"></div>
               
               <div class="summary-row total-row">
                 <span>Total</span>
-                <span>${{ (finalTotal / 100).toFixed(2) }}</span>
+                <span>${{ (finalTotal / 1000).toFixed(3) }}</span>
               </div>
             </div>
             
@@ -200,7 +200,7 @@
           <div class="checkout-summary">
             <div class="summary-row">
               <span>Total a pagar:</span>
-              <span class="total-amount">${{ (finalTotal / 100).toFixed(2) }}</span>
+              <span class="total-amount">${{ (finalTotal / 1000).toFixed(3) }}</span>
             </div>
           </div>
           

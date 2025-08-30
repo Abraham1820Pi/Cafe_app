@@ -58,7 +58,7 @@ export const useProductsStore = defineStore('products', {
         name: 'Croissant',
         description: 'Croissant francés recién horneado',
         price: 2000,
-        image: 'https://images.unsplash.com/photo-1555507036-ab794f4ade2a?w=300',
+        image: 'https://cloudfront-us-east-1.images.arcpublishing.com/infobae/OJP7C7C7LZHOJIGQZLL3TKE42A.jpg',
         category: 'Panadería',
         rating: 4.4,
         reviews: []
@@ -78,7 +78,7 @@ export const useProductsStore = defineStore('products', {
         name: 'Sandwich Club',
         description: 'Sandwich con pollo, tocino, lechuga y tomate',
         price: 5500,
-        image: 'https://images.unsplash.com/photo-1553909489-cd47e0ef937f?w=300',
+        image: 'https://media.elgourmet.com/recetas/cover_pv5iam8f1g_iStock-473336754.jpg',
         category: 'Comida',
         rating: 4.7,
         reviews: []

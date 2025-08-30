@@ -73,7 +73,7 @@
               <div class="order-items">
                 <div class="items-preview">
                   <div
-                    v-for="(item, index) in order.items.slice(0, 3)"
+                    v-for="(item) in order.items.slice(0, 3)"
                     :key="item.id"
                     class="item-preview"
                   >
@@ -93,7 +93,7 @@
               <div class="order-summary">
                 <div class="order-total">
                   <span class="total-label">Total:</span>
-                  <span class="total-amount">${{ (order.total / 100).toFixed(2) }}</span>
+                  <span class="total-amount">${{ (order.total / 1000).toFixed(3) }}</span>
                 </div>
                 
                 <div class="order-actions">

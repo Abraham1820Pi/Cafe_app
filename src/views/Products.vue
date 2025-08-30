@@ -77,7 +77,7 @@
               </div>
               
               <div class="product-footer">
-                <div class="product-price">${{ (product.price / 100).toFixed(2) }}</div>
+                <div class="product-price">${{ (product.price / 1000).toFixed(3) }}</div>
                 <button
                   @click="addToCart(product)"
                   class="btn btn-primary btn-sm"
@@ -97,7 +97,7 @@
         <router-link to="/cart" class="floating-cart-btn">
           <i class="fas fa-shopping-cart"></i>
           <span class="cart-count">{{ cartItemCount }}</span>
-          <span class="cart-total">${{ (cartTotal / 100).toFixed(2) }}</span>
+          <span class="cart-total">${{ (cartTotal / 1000).toFixed(3) }}</span>
         </router-link>
       </div>
     </div>
