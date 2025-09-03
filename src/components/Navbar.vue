@@ -6,17 +6,19 @@
           <i class="fas fa-coffee"></i>
           CaféApp
         </router-link>
-        
+
         <ul class="nav-links">
           <li><router-link to="/">Inicio</router-link></li>
           <li><router-link to="/products">Productos</router-link></li>
-          
+
           <template v-if="isAuthenticated">
             <li>
               <router-link to="/cart" class="cart-link">
                 <i class="fas fa-shopping-cart"></i>
                 Carrito
-                <span v-if="cartItemCount > 0" class="cart-badge">{{ cartItemCount }}</span>
+                <span v-if="cartItemCount > 0" class="cart-badge">{{
+                  cartItemCount
+                }}</span>
               </router-link>
             </li>
             <li><router-link to="/orders">Mis Pedidos</router-link></li>
@@ -29,7 +31,7 @@
               </button>
             </li>
           </template>
-          
+
           <template v-else>
             <li><router-link to="/login">Iniciar Sesión</router-link></li>
             <li><router-link to="/register">Registrarse</router-link></li>
@@ -41,30 +43,30 @@
 </template>
 
 <script>
-import { useAuthStore } from '@/stores/auth'
-import { useCartStore } from '@/stores/cart'
-import { computed } from 'vue'
+import { useAuthStore } from "@/stores/auth";
+import { useCartStore } from "@/stores/cart";
+import { computed } from "vue";
 
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   setup() {
-    const authStore = useAuthStore()
-    const cartStore = useCartStore()
-    
-    const isAuthenticated = computed(() => authStore.isAuthenticated)
-    const cartItemCount = computed(() => cartStore.cartItemCount)
-    
+    const authStore = useAuthStore();
+    const cartStore = useCartStore();
+
+    const isAuthenticated = computed(() => authStore.isAuthenticated);
+    const cartItemCount = computed(() => cartStore.cartItemCount);
+
     const logout = () => {
-      authStore.logout()
-    }
-    
+      authStore.logout();
+    };
+
     return {
       isAuthenticated,
       cartItemCount,
-      logout
-    }
-  }
-}
+      logout,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -98,7 +100,7 @@ export default {
 
 .btn-outline {
   background-color: transparent;
-  border: 2px solid rgba(255,255,255,0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius);
@@ -110,26 +112,27 @@ export default {
 }
 
 .btn-outline:hover {
-  background-color: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 768px) {
   .navbar-content {
     flex-direction: column;
     gap: 1rem;
+    justify-content: center;
+    align-items: center;
   }
-  
+
   .nav-links {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
-    width: 100%;
+    width: auto;
     text-align: center;
   }
-  
+
   .nav-links li {
     justify-content: center;
   }
 }
 </style>
-
