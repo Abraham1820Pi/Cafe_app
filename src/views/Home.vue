@@ -7,22 +7,30 @@
           <div class="hero-text">
             <h1 class="hero-title">Bienvenido a CaféApp</h1>
             <p class="hero-subtitle">
-              Descubre los mejores cafés artesanales, preparados con amor y servidos con excelencia.
-              Disfruta de una experiencia única en cada sorbo.
+              Descubre los mejores cafés artesanales, preparados con amor y
+              servidos con excelencia. Disfruta de una experiencia única en cada
+              sorbo.
             </p>
             <div class="hero-buttons">
               <router-link to="/products" class="btn btn-primary">
                 <i class="fas fa-coffee"></i>
                 Ver Productos
               </router-link>
-              <router-link v-if="!isAuthenticated" to="/register" class="btn btn-outline">
+              <router-link
+                v-if="!isAuthenticated"
+                to="/register"
+                class="btn btn-outline"
+              >
                 <i class="fas fa-user-plus"></i>
                 Únete Ahora
               </router-link>
             </div>
           </div>
           <div class="hero-image">
-            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500" alt="Café artesanal" />
+            <img
+              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500"
+              alt="Café artesanal"
+            />
           </div>
         </div>
       </div>
@@ -38,31 +46,42 @@
               <i class="fas fa-coffee"></i>
             </div>
             <h3>Café Premium</h3>
-            <p>Granos seleccionados de las mejores fincas del mundo, tostados artesanalmente.</p>
+            <p>
+              Granos seleccionados de las mejores fincas del mundo, tostados
+              artesanalmente.
+            </p>
           </div>
-          
+
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-clock"></i>
             </div>
             <h3>Entrega Rápida</h3>
-            <p>Tu pedido estará listo en 15-20 minutos. Calidad y rapidez garantizada.</p>
+            <p>
+              Tu pedido estará listo en 15-20 minutos. Calidad y rapidez
+              garantizada.
+            </p>
           </div>
-          
+
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-star"></i>
             </div>
             <h3>Programa de Fidelidad</h3>
-            <p>Gana puntos con cada compra y canjéalos por recompensas exclusivas.</p>
+            <p>
+              Gana puntos con cada compra y canjéalos por recompensas
+              exclusivas.
+            </p>
           </div>
-          
+
           <div class="feature-card">
             <div class="feature-icon">
               <i class="fas fa-mobile-alt"></i>
             </div>
             <h3>Pedidos Online</h3>
-            <p>Ordena desde cualquier lugar y recoge tu pedido cuando esté listo.</p>
+            <p>
+              Ordena desde cualquier lugar y recoge tu pedido cuando esté listo.
+            </p>
           </div>
         </div>
       </div>
@@ -73,15 +92,26 @@
       <div class="container">
         <h2 class="section-title text-center">Productos Populares</h2>
         <div class="products-preview">
-          <div v-for="product in popularProducts" :key="product.id" class="product-preview-card">
-            <img :src="product.image" :alt="product.name" class="product-preview-image" />
+          <div
+            v-for="product in popularProducts"
+            :key="product.id"
+            class="product-preview-card"
+          >
+            <img
+              :src="product.image"
+              :alt="product.name"
+              class="product-preview-image"
+            />
             <div class="product-preview-info">
               <h4>{{ product.name }}</h4>
               <p class="price">${{ (product.price / 1000).toFixed(3) }}</p>
               <div class="rating">
                 <span class="stars">
-                  <i v-for="n in 5" :key="n" 
-                     :class="n <= product.rating ? 'fas fa-star' : 'far fa-star'"></i>
+                  <i
+                    v-for="n in 5"
+                    :key="n"
+                    :class="n <= product.rating ? 'fas fa-star' : 'far fa-star'"
+                  ></i>
                 </span>
                 <span class="rating-value">{{ product.rating }}</span>
               </div>
@@ -101,7 +131,10 @@
       <div class="container">
         <div class="cta-content">
           <h2>¿Listo para comenzar?</h2>
-          <p>Únete a nuestra comunidad de amantes del café y disfruta de beneficios exclusivos.</p>
+          <p>
+            Únete a nuestra comunidad de amantes del café y disfruta de
+            beneficios exclusivos.
+          </p>
           <router-link to="/register" class="btn btn-primary btn-large">
             <i class="fas fa-user-plus"></i>
             Crear Cuenta Gratis
@@ -113,36 +146,39 @@
 </template>
 
 <script>
-import { useAuthStore } from '@/stores/auth'
-import { useProductsStore } from '@/stores/products'
-import { computed } from 'vue'
+import { useAuthStore } from "@/stores/auth";
+import { useProductsStore } from "@/stores/products";
+import { computed } from "vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   setup() {
-    const authStore = useAuthStore()
-    const productsStore = useProductsStore()
-    
-    const isAuthenticated = computed(() => authStore.isAuthenticated)
-    const popularProducts = computed(() => 
-      productsStore.allProducts
-        .sort((a, b) => b.rating - a.rating)
-        .slice(0, 4)
-    )
-    
+    const authStore = useAuthStore();
+    const productsStore = useProductsStore();
+
+    const isAuthenticated = computed(() => authStore.isAuthenticated);
+    const popularProducts = computed(() =>
+      productsStore.allProducts.sort((a, b) => b.rating - a.rating).slice(0, 4)
+    );
+
     return {
       isAuthenticated,
-      popularProducts
-    }
-  }
-}
+      popularProducts,
+    };
+  },
+};
 </script>
 
 <style scoped>
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, rgba(139, 69, 19, 0.9), rgba(210, 105, 30, 0.9)),
-              url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200') center/cover;
+  background: linear-gradient(
+      135deg,
+      rgba(139, 69, 19, 0.9),
+      rgba(210, 105, 30, 0.9)
+    ),
+    url("https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1200")
+      center/cover;
   color: white;
   padding: 4rem 0;
   min-height: 500px;
@@ -188,7 +224,7 @@ export default {
 /* Features Section */
 .features {
   padding: 4rem 0;
-  background-color: var(--light-bg);
+  background-color: linear-gradient(123deg, #f8f9fa, 70%, #cd853f 100%);
 }
 
 .section-title {
@@ -215,7 +251,7 @@ export default {
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .feature-icon {
@@ -257,7 +293,7 @@ export default {
 
 .product-preview-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .product-preview-image {
@@ -300,8 +336,8 @@ export default {
 
 /* CTA Section */
 .cta {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: white;
+  background: linear-gradient(135deg, #ffe1cc, 70% #cd853f 100%);
+  color: var(--primary-color);
   padding: 4rem 0;
   text-align: center;
 }
@@ -328,27 +364,26 @@ export default {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .hero-title {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
   }
-  
+
   .section-title {
     font-size: 2rem;
   }
-  
+
   .features-grid,
   .products-preview {
     grid-template-columns: 1fr;
   }
-  
+
   .hero-buttons {
     justify-content: center;
   }
 }
 </style>
-

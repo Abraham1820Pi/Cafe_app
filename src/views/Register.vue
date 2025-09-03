@@ -7,7 +7,7 @@
             <h2><i class="fas fa-user-plus"></i> Crear Cuenta</h2>
             <p>Únete a nuestra comunidad de amantes del café</p>
           </div>
-          
+
           <form @submit.prevent="handleRegister" class="auth-form">
             <div class="form-row">
               <div class="form-group">
@@ -24,7 +24,7 @@
                   required
                 />
               </div>
-              
+
               <div class="form-group">
                 <label for="lastName" class="form-label">
                   <i class="fas fa-user"></i>
@@ -40,7 +40,7 @@
                 />
               </div>
             </div>
-            
+
             <div class="form-group">
               <label for="email" class="form-label">
                 <i class="fas fa-envelope"></i>
@@ -55,7 +55,7 @@
                 required
               />
             </div>
-            
+
             <div class="form-group">
               <label for="phone" class="form-label">
                 <i class="fas fa-phone"></i>
@@ -70,7 +70,7 @@
                 required
               />
             </div>
-            
+
             <div class="form-group">
               <label for="password" class="form-label">
                 <i class="fas fa-lock"></i>
@@ -91,17 +91,22 @@
                   @click="togglePassword"
                   class="password-toggle"
                 >
-                  <i :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                  <i
+                    :class="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"
+                  ></i>
                 </button>
               </div>
               <div class="password-strength">
                 <div class="strength-bar" :class="passwordStrength.class">
-                  <div class="strength-fill" :style="{ width: passwordStrength.width }"></div>
+                  <div
+                    class="strength-fill"
+                    :style="{ width: passwordStrength.width }"
+                  ></div>
                 </div>
                 <span class="strength-text">{{ passwordStrength.text }}</span>
               </div>
             </div>
-            
+
             <div class="form-group">
               <label for="confirmPassword" class="form-label">
                 <i class="fas fa-lock"></i>
@@ -115,20 +120,24 @@
                 placeholder="Repite tu contraseña"
                 required
               />
-              <div v-if="form.confirmPassword && !passwordsMatch" class="error-message">
+              <div
+                v-if="form.confirmPassword && !passwordsMatch"
+                class="error-message"
+              >
                 <i class="fas fa-exclamation-circle"></i>
                 Las contraseñas no coinciden
               </div>
             </div>
-            
+
             <div class="form-group">
               <label class="checkbox-label">
                 <input type="checkbox" v-model="form.acceptTerms" required />
                 <span class="checkmark"></span>
-                Acepto los <a href="#" class="auth-link">términos y condiciones</a>
+                Acepto los
+                <a href="#" class="auth-link">términos y condiciones</a>
               </label>
             </div>
-            
+
             <div class="form-group">
               <label class="checkbox-label">
                 <input type="checkbox" v-model="form.newsletter" />
@@ -136,21 +145,24 @@
                 Quiero recibir ofertas y novedades por email
               </label>
             </div>
-            
-            <button 
-              type="submit" 
-              class="btn btn-primary btn-full" 
+
+            <button
+              type="submit"
+              class="btn btn-primary btn-full"
               :disabled="loading || !isFormValid"
             >
               <i v-if="loading" class="fas fa-spinner fa-spin"></i>
               <i v-else class="fas fa-user-plus"></i>
-              {{ loading ? 'Creando cuenta...' : 'Crear Cuenta' }}
+              {{ loading ? "Creando cuenta..." : "Crear Cuenta" }}
             </button>
           </form>
-          
+
           <div class="auth-footer">
-            <p>¿Ya tienes una cuenta? 
-              <router-link to="/login" class="auth-link">Inicia sesión aquí</router-link>
+            <p>
+              ¿Ya tienes una cuenta?
+              <router-link to="/login" class="auth-link"
+                >Inicia sesión aquí</router-link
+              >
             </p>
           </div>
         </div>
@@ -160,94 +172,96 @@
 </template>
 
 <script>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 
 export default {
-  name: 'Register',
+  name: "Register",
   setup() {
-    const router = useRouter()
-    const authStore = useAuthStore()
-    
+    const router = useRouter();
+    const authStore = useAuthStore();
+
     const form = ref({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      password: '',
-      confirmPassword: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      password: "",
+      confirmPassword: "",
       acceptTerms: false,
-      newsletter: true
-    })
-    
-    const loading = ref(false)
-    const showPassword = ref(false)
-    
+      newsletter: true,
+    });
+
+    const loading = ref(false);
+    const showPassword = ref(false);
+
     const togglePassword = () => {
-      showPassword.value = !showPassword.value
-    }
-    
+      showPassword.value = !showPassword.value;
+    };
+
     const passwordStrength = computed(() => {
-      const password = form.value.password
-      if (!password) return { class: '', width: '0%', text: '' }
-      
-      let score = 0
-      if (password.length >= 6) score++
-      if (password.length >= 8) score++
-      if (/[A-Z]/.test(password)) score++
-      if (/[0-9]/.test(password)) score++
-      if (/[^A-Za-z0-9]/.test(password)) score++
-      
+      const password = form.value.password;
+      if (!password) return { class: "", width: "0%", text: "" };
+
+      let score = 0;
+      if (password.length >= 6) score++;
+      if (password.length >= 8) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[0-9]/.test(password)) score++;
+      if (/[^A-Za-z0-9]/.test(password)) score++;
+
       const levels = [
-        { class: 'weak', width: '20%', text: 'Muy débil' },
-        { class: 'weak', width: '40%', text: 'Débil' },
-        { class: 'medium', width: '60%', text: 'Regular' },
-        { class: 'strong', width: '80%', text: 'Fuerte' },
-        { class: 'strong', width: '100%', text: 'Muy fuerte' }
-      ]
-      
-      return levels[Math.min(score, 4)]
-    })
-    
+        { class: "weak", width: "20%", text: "Muy débil" },
+        { class: "weak", width: "40%", text: "Débil" },
+        { class: "medium", width: "60%", text: "Regular" },
+        { class: "strong", width: "80%", text: "Fuerte" },
+        { class: "strong", width: "100%", text: "Muy fuerte" },
+      ];
+
+      return levels[Math.min(score, 4)];
+    });
+
     const passwordsMatch = computed(() => {
-      return form.value.password === form.value.confirmPassword
-    })
-    
+      return form.value.password === form.value.confirmPassword;
+    });
+
     const isFormValid = computed(() => {
-      return form.value.firstName &&
-             form.value.lastName &&
-             form.value.email &&
-             form.value.phone &&
-             form.value.password.length >= 6 &&
-             passwordsMatch.value &&
-             form.value.acceptTerms
-    })
-    
+      return (
+        form.value.firstName &&
+        form.value.lastName &&
+        form.value.email &&
+        form.value.phone &&
+        form.value.password.length >= 6 &&
+        passwordsMatch.value &&
+        form.value.acceptTerms
+      );
+    });
+
     const handleRegister = async () => {
-      if (!isFormValid.value) return
-      
-      loading.value = true
-      
+      if (!isFormValid.value) return;
+
+      loading.value = true;
+
       try {
         const result = await authStore.register({
           name: `${form.value.firstName} ${form.value.lastName}`,
           email: form.value.email,
           phone: form.value.phone,
           password: form.value.password,
-          newsletter: form.value.newsletter
-        })
-        
+          newsletter: form.value.newsletter,
+        });
+
         if (result.success) {
-          router.push('/login')
+          router.push("/login");
         }
       } catch (error) {
-        console.error('Error en registro:', error)
+        console.error("Error en registro:", error);
       } finally {
-        loading.value = false
+        loading.value = false;
       }
-    }
-    
+    };
+
     return {
       form,
       loading,
@@ -256,10 +270,10 @@ export default {
       passwordsMatch,
       isFormValid,
       togglePassword,
-      handleRegister
-    }
-  }
-}
+      handleRegister,
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -267,9 +281,11 @@ export default {
   min-height: calc(100vh - 140px);
   display: flex;
   align-items: center;
+  /*
   background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(210, 105, 30, 0.1)),
               url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200') center/cover;
   background-attachment: fixed;
+  */
   padding: 2rem 0;
 }
 
@@ -283,7 +299,7 @@ export default {
 .auth-card {
   background: var(--white);
   border-radius: var(--border-radius);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   padding: 2.5rem;
   width: 100%;
   max-width: 500px;
@@ -454,15 +470,14 @@ export default {
     margin: 1rem;
     padding: 2rem 1.5rem;
   }
-  
+
   .auth-header h2 {
     font-size: 1.5rem;
   }
-  
+
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
   }
 }
 </style>
-
